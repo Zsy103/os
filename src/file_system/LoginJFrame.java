@@ -51,7 +51,6 @@ class LoginJFrame extends JFrame{
 				if (e.getSource()==loginButton) {
 					String userName=usernameField.getText();
 					int flag=FileSystem.checkUser(usernameField.getText(), String.valueOf(passwordField.getPassword()));
-					System.out.println(flag);
 					if (flag==0) {
 						FileSystem.initPanel(userName);
 						dispose();
