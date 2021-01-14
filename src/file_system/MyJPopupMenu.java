@@ -28,7 +28,7 @@ public class MyJPopupMenu extends JPopupMenu{
 		logoutItem=new JMenuItem("注销");
 		detailItem=new JMenuItem("详细信息");
 		// TODO 自动生成的构造函数存根
-		if (type==1) {//目录菜单
+		if (type==1) {//目录按钮的右键菜单
 			if (!currentDentry.getParentDentry().getUserName().equals(currentDentry.getUserName())) {
 				deleteItem.setText("删除用户");
 			}
@@ -36,7 +36,7 @@ public class MyJPopupMenu extends JPopupMenu{
 				public void mouseReleased(MouseEvent e)
 				{
 					if (e.getButton()==e.BUTTON1) {
-						//rename();
+						//重命名目录
 						String dentryName=JOptionPane.showInputDialog("请输入目录名：");
 						currentDentry.renameDentryName(dentryName);
 						gridJPanel.showFile();
@@ -47,7 +47,7 @@ public class MyJPopupMenu extends JPopupMenu{
 				public void mouseReleased(MouseEvent e)
 				{
 					if (e.getButton()==e.BUTTON1) {
-						//delete();
+						//删除目录
 						currentDentry.dentryDelete();
 						gridJPanel.showFile();
 					}
@@ -57,7 +57,7 @@ public class MyJPopupMenu extends JPopupMenu{
 				public void mouseReleased(MouseEvent e)
 				{
 					if (e.getButton()==e.BUTTON1) {
-						//open();
+						//i进入目录
 						FileSystem.setCurrentDentry(currentDentry);
 						gridJPanel.showFile();
 					}
@@ -67,6 +67,7 @@ public class MyJPopupMenu extends JPopupMenu{
 				public void mouseReleased(MouseEvent e)
 				{
 					if (e.getButton()==e.BUTTON1) {
+						//显示目录详细信息
 						DetailJFrame detailJFrame=new DetailJFrame(currentDentry);
 					}
 				}
@@ -76,13 +77,13 @@ public class MyJPopupMenu extends JPopupMenu{
 			add(renameItem);
 			add(detailItem);
 		}
-		else if (type==2){//新建菜单
+		else if (type==2){//空白处的右键菜单
 			add(newItem);
 			newItem.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e)
 				{
 					if (e.getButton()==e.BUTTON1) {
-						//new();
+						//新建目录
 						String dentryName=JOptionPane.showInputDialog("请输入目录名：");
 						if (dentryName!=null) {
 							if (currentDentry.dentryCreate(dentryName, currentDentry.getUserName(), currentDentry)) {
@@ -97,7 +98,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			newFileItem.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e){
 					if (e.getButton()==e.BUTTON1) {
-						//newfile();
+						//新建文件
 						String fileName=JOptionPane.showInputDialog("请输入文件名：");
 						if (fileName!=null) {
 							currentDentry.fileCreate(fileName);
@@ -111,6 +112,7 @@ public class MyJPopupMenu extends JPopupMenu{
 				newUserItem.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent e){
 						if (e.getButton()==e.BUTTON1) {
+							//新建用户
 							LogonJFrame logonJFrame=new LogonJFrame();
 						}
 					}
@@ -120,6 +122,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			logoutItem.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e){
 					if (e.getButton()==e.BUTTON1) {
+						//注销
 						FileSystem.login();
 						FileSystem.getJFrame().dispose();
 					}
@@ -127,7 +130,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			});
 		}
 	}
-	public MyJPopupMenu(MyFile file,GridJPanel gridJPanel,Dentry currentDentry) {
+	public MyJPopupMenu(MyFile file,GridJPanel gridJPanel,Dentry currentDentry) { //文件按钮的右键菜单
 		// TODO 自动生成的构造函数存根
 		openItem=new JMenuItem("打开");
 		deleteItem=new JMenuItem("删除");
@@ -137,6 +140,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			public void mouseReleased(MouseEvent e)
 			{
 				if (e.getButton()==e.BUTTON1) {
+					//打开文件
 					FileJFrame fileJFrame=new FileJFrame(file);
 				}
 			}
@@ -145,7 +149,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			public void mouseReleased(MouseEvent e)
 			{
 				if (e.getButton()==e.BUTTON1) {
-					//rename();
+					//重命名文件
 					String fileName=JOptionPane.showInputDialog("请输入文件名：");
 					if (fileName!=null) {
 						file.rename(fileName);
@@ -158,7 +162,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			public void mouseReleased(MouseEvent e)
 			{
 				if (e.getButton()==e.BUTTON1) {
-					//delete();
+					//删除文件
 					currentDentry.fileDelete(file.getFileName());
 					gridJPanel.showFile();
 				}
@@ -168,6 +172,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			public void mouseReleased(MouseEvent e)
 			{
 				if (e.getButton()==e.BUTTON1) {
+					//显示文件详细信息
 					DetailJFrame detailJFrame=new DetailJFrame(file);
 				}
 			}

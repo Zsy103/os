@@ -22,6 +22,7 @@ public class DataBlock {
 		a=str.length()-x;
 		if(a<=10) {
 			array=new StringBuffer(str.substring(x)); //x表示开始的字符位置，字符串不大于10，就直接读完
+			next=null;
 		}
 		else {              
 			array=new StringBuffer(str.substring(x,x+10));     //x表示开始位置，x+10表示结束位置，一次读10个字符。
@@ -33,7 +34,7 @@ public class DataBlock {
 	StringBuffer getFileContent() { //获取文件内容
 		StringBuffer str1=new StringBuffer(); //储存最后得到的content内容然后返回给inode
 		if(array!=null) {
-			str1=array;  
+			str1=new StringBuffer(array);  
 			if (next!=null)
 				str1.append(next.getFileContent()); 
 			return str1;
